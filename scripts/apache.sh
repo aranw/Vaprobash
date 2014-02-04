@@ -13,15 +13,14 @@ sudo add-apt-repository -y ppa:ondrej/apache2
 sudo apt-get update
 
 # Install Apache
-
-
-if [ $2 == "mod_php5" ]; then
+# 
+if [ "$2" == "mod_php5" ]; then
     sudo apt-get install -y apache2 php5 libapache2-mod-php5
     sed -i "s/error_reporting = .*/error_reporting = E_ALL/" /etc/php5/apache2/php.ini
     sed -i "s/display_errors = .*/display_errors = On/" /etc/php5/apache2/php.ini
 fi
 
-if [ $2 == "php5-fpm" ]; then
+if [ "$2" == "php5-fpm" ]; then
     sudo apt-get install -y apache2-mpm-event libapache2-mod-fastcgi
 fi
 
@@ -36,9 +35,7 @@ sudo mv vhost /usr/local/bin
 # Create a virtualhost to start
 sudo vhost -s $1.xip.io -d /vagrant
 
-
-
-if [ $2 == "php5-fpm" ]; then
+if [ "$2" == "php5-fpm" ]; then
 
     # PHP Config for Apache
     cat > /etc/apache2/conf-available/php5-fpm.conf << EOF

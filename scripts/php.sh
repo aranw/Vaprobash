@@ -25,7 +25,7 @@ sudo apt-get update
 # Install PHP
 sudo apt-get install -y php5-cli php5-mysql php5-pgsql php5-sqlite php5-curl php5-gd php5-gmp php5-mcrypt php5-xdebug php5-memcached php5-imagick
 
-if [ $2 == "php5-fpm" ]; then
+if [ "$2" == "php5-fpm" ]; then
     sudo apt-get install php5-fpm
 fi
 
@@ -36,7 +36,7 @@ xdebug.cli_color=1
 xdebug.show_local_vars=1
 EOF
 
-if [ $2 == "php5-fpm" ]; then
+if [ "$2" == "php5-fpm" ]; then
     # PHP Error Reporting Config
     sed -i "s/error_reporting = .*/error_reporting = E_ALL/" /etc/php5/fpm/php.ini
     sed -i "s/display_errors = .*/display_errors = On/" /etc/php5/fpm/php.ini
