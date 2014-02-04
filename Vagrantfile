@@ -13,6 +13,7 @@ mysql_version         = "5.5"    # Options: 5.5 | 5.6
 pgsql_root_password   = "root"   # We'll assume user "root"
 ruby_version          = "latest" # Choose what ruby version should be installed (will also be the default version)
 php_version           = "latest" # Options: latest|previous|distributed   For 12.04. latest=5.5, previous=5.4, distributed=5.3
+php_type              = "mod_php5" # Options: mod_php5|php5-fpm - For Nginx use php5-fpm
 composer_packages     = [        # List any global Composer packages that you want to install
   #"phpunit/phpunit:3.7.*",
   #"codeception/codeception=*",
@@ -58,9 +59,6 @@ Vagrant.configure("2") do |config|
   # Provision Base Packages
   config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/base.sh"
 
-  # Provision PHP
-  config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/php.sh", args: php_version
-
   # Provision Oh-My-Zsh
   # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/zsh.sh"
 
@@ -73,13 +71,21 @@ Vagrant.configure("2") do |config|
   ##########
 
   # Provision Apache Base
-  # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/apache.sh", args: server_ip
+  config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/apache.sh", args: [server_ip, php_type]
 
   # Provision HHVM
   # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/hhvm.sh"
 
   # Provision Nginx Base
   # config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/nginx.sh", args: server_ip
+
+
+  ####
+  # Web Servers
+  ##########
+
+  # Provision PHP
+  config.vm.provision "shell", path: "https://raw.github.com/#{github_username}/#{github_repo}/#{github_branch}/scripts/php.sh", args: [php_version, php_type]
 
 
   ####
