@@ -3,6 +3,7 @@
 echo ">>> Installing Apache Server"
 
 [[ -z "$1" ]] && { echo "!!! IP address not set. Check the Vagrant file."; exit 1; }
+[[ -z "$2" ]] && { echo "!!! PHP Type not set. Check the Vagrant file."; exit 1; }
 
 # Add repo for latest FULL stable Apache
 # (Required to remove conflicts with PHP PPA due to partial Apache upgrade within it)

@@ -8,6 +8,8 @@ else
     php_version="$1"
 fi
 
+[[ -z "$2" ]] && { echo "!!! PHP Type not set. Check the Vagrant file."; exit 1; }
+
 echo ">>> Installing PHP $1 version"
 
 if [ $php_version == "latest" ]; then

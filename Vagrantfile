@@ -33,7 +33,7 @@ Vagrant.configure("2") do |config|
   config.vm.box_url = "http://files.vagrantup.com/precise64.box"
 
   # Create a hostname, don't forget to put it to the `hosts` file
-  config.vm.hostname = "vaprobash.dev"
+  config.vm.hostname = "vaprobash.vagrant"
 
   # Create a static IP
   config.vm.network :private_network, ip: server_ip
